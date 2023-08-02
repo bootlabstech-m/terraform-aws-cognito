@@ -27,6 +27,9 @@ resource "aws_cognito_user_pool" "user_pool" {
       priority = 2
     }
   }
+  lifecycle {
+    ignore_changes = [tags]
+  }
 
 }
 
