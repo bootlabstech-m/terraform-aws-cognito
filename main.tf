@@ -1,5 +1,5 @@
 resource "aws_cognito_user_pool" "user_pool" {
-  name = var.user_pool_name
+  name = var.name
   mfa_configuration = var.mfa_configuration
   # alias_attributes = var.signin_option
   username_attributes = var.signin_option

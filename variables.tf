@@ -1,4 +1,4 @@
-variable "user_pool_name" {
+variable "name" {
   description = "The name of the user pool"
   type        = string
 }
