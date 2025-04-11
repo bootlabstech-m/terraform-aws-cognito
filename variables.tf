@@ -44,8 +44,8 @@ variable "role_arn" {
    description = "mPaaS IAM ARN role"
    type = string
 }
-variable "token_validity_units" {
-  description = "value"
-  type = map(string)
+# variable "token_validity_units" {
+#   description = "value"
+#   type = map(string)
   
-}
+# }
