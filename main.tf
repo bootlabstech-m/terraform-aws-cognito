@@ -1,14 +1,14 @@
 resource "aws_cognito_user_pool" "user_pool" {
   name = var.name
   mfa_configuration = var.mfa_configuration
-  # alias_attributes = var.signin_option
   username_attributes = var.signin_option
 
-
   schema {        
-      attribute_data_type      = "String"
-      name                     = "email"
-      required                 = true
+      attribute_data_type      = var.schema_attribute_data_type
+      developer_only_attribute = var.schema_developer_only_attribute
+      mutable                  = var.shema_mutable
+      name                     = var.schema_name
+      required                 = var.shema_required
     }
 
   email_configuration {
@@ -18,15 +18,29 @@ resource "aws_cognito_user_pool" "user_pool" {
   }
    account_recovery_setting {
     recovery_mechanism {
-      name     = "verified_email"
-      priority = 1
+      name     = var.recovery_mechanism_name
+      priority = var.recovery_mechanism_priority
     }
 
     recovery_mechanism {
-      name     = "verified_phone_number"
-      priority = 2
+      name     = var.recovery_mechanism_name2
+      priority = var.recovery_mechanism_priority2
     }
   }
+  admin_create_user_config {
+      allow_admin_create_user_only = var.allow_admin_create_user_only
+  }
+  password_policy {
+       minimum_length                   = 8 
+       require_lowercase                = true
+       require_numbers                  = true 
+       require_symbols                  = true 
+       require_uppercase                = true 
+       temporary_password_validity_days = 7
+  }
+  verification_message_template {
+    default_email_option = var.default_email_option
+        }
   lifecycle {
     ignore_changes = [tags ]
   }
